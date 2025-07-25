@@ -77,6 +77,3 @@ The engine uses a **hybrid Rules + ML approach**:
 
 ---
 
-## **8. License**  
-This project is for demonstration purposes and is released under the MIT License.
- 
