@@ -36,7 +36,7 @@ This project simulates that challenge by building a scalable system on **Google 
 
 The engine uses a **hybrid Rules + ML approach**:  
 1. **Data Curation & Ground Truth**  
-   - Manually tagged **100+ products** using a custom [Tagging Guide](data_curation/Tagging_Guide_and_Rules.md).  
+   - Manually tagged **100+ products** using a custom [Tagging Guide](data_curation/Tagging_Guide.md).  
    - Simulates "judgment and interpretation" required for high-quality mapping.  
 
 2. **Rule-Based Engine**  
