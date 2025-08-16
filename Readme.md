@@ -2,7 +2,7 @@
 
 
 
-This repository contains a production-ready prototype of a full-scale data pipeline that intelligently maps raw e-commerce product data into bespoke, client-specific taxonomies. It demonstrates a hybrid approach that combines a **high-precision SQL rule-based engine** with a **flexible hierarchical machine learning model** to achieve both scale and accuracy.
+This repository contains a production-ready prototype of a full-scale data pipeline that intelligently maps raw e-commerce product data into client-specific taxonomies. It demonstrates a hybrid approach that combines a **high-precision SQL rule-based engine** with a **flexible hierarchical machine learning model** to achieve both scale and accuracy.
 
 ---
 
