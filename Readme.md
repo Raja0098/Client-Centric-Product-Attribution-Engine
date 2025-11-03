@@ -1,106 +1,187 @@
-# Client-Centric Product Attribution Engine
+# 🧠 Client-Centric Product Attribution Engine
 
-
-
-This repository contains a production-ready prototype of a full-scale data pipeline that intelligently maps raw e-commerce product data into client-specific taxonomies. It demonstrates a hybrid approach that combines a **high-precision SQL rule-based engine** with a **flexible hierarchical machine learning model** to achieve both scale and accuracy.
+This repository contains a **production-ready prototype** of a full-scale **data pipeline** that intelligently maps **raw e-commerce product data** into **client-specific taxonomies**.  
+It demonstrates a **hybrid approach** combining a **high-precision SQL rule-based engine** with a **hierarchical machine learning model** and an **AI agent** for automated insight generation and reporting.
 
 ---
 
 ## 1. The Business Problem: Beyond a "One-Size-Fits-All" Taxonomy
-In market research and retail analytics, corporate clients view their product catalogs through unique strategic lenses. A generic taxonomy is insufficient for generating actionable insights.
 
-This project tackles this challenge by building a system to ingest raw product data and map it into two distinct, client-driven taxonomies:
+In market research and retail analytics, corporate clients view their product catalogs through **unique strategic lenses**.  
+A generic taxonomy is insufficient for generating actionable insights.
 
-- **Client A ("The Alpha Seeker")**: Requires deep, feature-rich granularity for market opportunity analysis.  
-  *Example:* `Audio > Headphones > Over-Ear (Noise Cancelling)`
+This project builds a system to ingest raw product data and map it into **distinct, client-driven taxonomies**:
 
-- **Client B ("The Category Manager")**: Needs broad, department-level categories with clear price segmentation for high-level performance tracking.  
-  *Example:* `Electronics, Premium Tier`
+- **Client A ("The Alpha Seeker")** – Requires **deep, feature-rich granularity** for detailed market opportunity analysis.  
+  *Example: Audio > Headphones > Over-Ear (Noise Cancelling)*  
+
+- **Client B ("The Category Manager")** – Needs **broad, department-level categories** with **price segmentation** for high-level performance tracking.  
+  *Example: Electronics, Premium Tier*
 
 ---
 
-## 2. The Solution: A Hybrid Rules + ML Engine
-To solve this, we developed a hybrid attribution engine that leverages the strengths of both deterministic rules and probabilistic machine learning.
+## 2. The Solution: A Hybrid Rules + ML + Agent Engine
 
-- **High-Precision Rules First**:  
-  A robust SQL engine (BigQuery) classifies products with near-100% confidence based on keywords, brands, or price points.  
+This project implements a **hybrid attribution system** that unites deterministic SQL rules, probabilistic ML, and intelligent insight automation.
 
-- **Intelligent ML for Ambiguity**:  
-  Products not covered by rules are routed to a hierarchical ML pipeline.  
-  - Level 1 models predict top-level categories.  
-  - Level 2 models use Level 1 predictions as features, improving accuracy for fine-grained categories.  
+### 🧩 Components:
+
+**1️⃣ High-Precision Rule Engine:**  
+A robust SQL logic classifies products with near-100% confidence using keywords, brand patterns, or price points.
+
+**2️⃣ Hierarchical ML Pipeline:**  
+Unmapped records are passed to a two-level machine learning hierarchy:
+- **Level 1:** Predicts top-level category.
+- **Level 2:** Uses Level 1 output as a feature for fine-grained sub-category classification.
+
+**3️⃣ Automated Insight Agent:**  
+An **LLM-based agent** analyzes the charts and metrics generated,  
+produces a **summary of findings**, identifies anomalies or opportunities,  
+and can **generate a client-ready report** or request additional data for deeper analysis.
 
 ---
 
 ## 3. Tech Stack & Architecture
-- **Cloud Platform (Target):** Google Cloud Platform (GCP)  
-- **Data Warehousing:** Google BigQuery  
-- **Machine Learning (Local):** Python, Scikit-learn, Pandas  
-- **Visualization & Insights:** Matplotlib, Seaborn, Plotly  
-- **Languages:** SQL, Python  
 
-The pipeline is built locally but designed for seamless deployment on GCP using **Vertex AI** (model hosting) and **Cloud Functions/Workflows** (orchestration).
+### 🧠 Tech Stack
+
+- **Languages:** Python, SQL  
+- **Libraries:** Pandas, Scikit-learn, Matplotlib, Seaborn, Plotly  
+- **App Framework:** FastAPI (for agent integration & reporting)  
+- **Model Serialization:** Joblib  
+- **Visualization:** Matplotlib / Seaborn / Plotly  
+- **LLM Integration:** LangGraph-based agent  
+
+---
+
+### 🏗️ System Architecture
+
+'''
+graph TD
+    %% Define Nodes
+    A[Raw Product Data]
+    B[Rule Engine SQL]
+    C[Unmapped Records]
+    D[Hierarchical ML Attribution]
+    E[Final Tagged Dataset]
+    F[Insight Generator Agent]
+    G[📊 Interactive Client Report]
+
+    %% Define Flow
+    A --> B
+    B -- Unmapped Flow --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+
+    %% Apply Styles for clarity (Optional but helpful)
+    style A fill:#D9E8FF,stroke:#3C78D8
+    style B fill:#FFF2CC,stroke:#E0A300
+    style D fill:#E6CCFF,stroke:#A349A4
+    style E fill:#D0F0C0,stroke:#6AA84F
+    style F fill:#FFF2CC,stroke:#E0A300
+    style G fill:#FFD9D9,stroke:#CC0000
+'''
+
+
+- Integrate a web dashboard (Streamlit) for reviewing outputs.
+
 
 ---
 
 ## 4. Key Features
-- **Hierarchical ML Model:**  
-  A chained prediction pipeline where sub-category models are guided by parent predictions, mirroring human decision-making.  
 
-- **Hybrid Tagging Logic:**  
-  Combines rule-based precision with ML flexibility.  
+### 🔗 Hierarchical ML Model  
+Chained prediction pipeline where **sub-category models** are guided by **parent-level predictions**, mirroring real decision-making.
 
-- **Multi-Client Architecture:**  
-  Onboard new clients by training new model heads on their unique taxonomies.  
+### ⚙️ Hybrid Tagging Logic  
+Combines **rule-based precision** with **ML flexibility** for high accuracy even in ambiguous cases.
 
-- **Automated Insights Generation:**  
-  Outputs are not just tagged data, but **strategic visualizations** that create immediate business value.  
+### 👥 Multi-Client Architecture  
+Easily onboard new clients by training **custom model heads** aligned with their taxonomy.
+
+### 📊 Automated Insights Generation  
+Outputs include not just tagged data, but **visual reports and analytical charts** ready for client presentations.
+
+### 🤖 AI Agent Integration  
+The agent:
+- Analyzes the visualizations and data summaries.
+- Generates a **narrative business summary**.
+- Provides **data-driven recommendations**.
+- Can automatically **create client-ready reports** in text or HTML.
 
 ---
 
 ## 5. Business Impact & Strategic Insights
-This engine goes beyond tagging—it acts as a **strategic analysis tool**.  
 
-Deliverables include visualizations that answer critical business questions:
+This engine goes **beyond tagging** — it acts as a **strategic analysis tool** for market researchers and analysts.
 
+### Deliverables include:
 - **Interactive Market Overview:**  
-  Sunburst charts highlight catalog structure, resource allocation, and gaps.  
-
+  Sunburst charts reveal catalog hierarchy, coverage, and focus areas.  
 - **Competitive Price Landscape:**  
-  Violin plots show market saturation and premium opportunities by price distribution.  
-
+  Violin plots visualize pricing tiers and premium gaps.  
 - **Market Opportunity Matrix:**  
-  Bubble charts map sub-categories by **market size (product count)** and **market position (average price)**, revealing:  
-  - *Mass-Market Battlegrounds*  
-  - *Niche & Premium Opportunities*  
-  - *Established Market Leaders*  
+  Bubble charts show market saturation vs. price opportunities.
+
+### Example Business Insights:
+- Identify **mass-market vs. premium gaps**.  
+- Discover **underrepresented sub-categories**.  
+- Highlight **growth segments** based on pricing trends.
 
 ---
 
 ## 6. Project Deliverables
-- **Trained ML Models**:  
-  Five saved `.joblib` model files for Client A (hierarchical) and Client B (two-tier).  
 
-- **Reusable SQL Rule Engine**:  
-  BigQuery script at `sql/rule_based_tagging.sql` for deterministic first-pass categorization.  
+- **Trained ML Models:**  
+  Five saved `.joblib` models for Client A (hierarchical) and Client B (two-tier).
 
-- **End-to-End Local Pipeline**:  
-  `run_pipeline.py` to train models and predict categories on new data.  
+- **Reusable SQL Rule Engine:**  
+  SQL script for deterministic first-pass categorization (`sql/rule_based_tagging.sql`).
 
-- **Client-Ready Insights Module**:  
-  `generate_insights.py` to produce dashboards and visualizations from final tagged datasets.  
+- **End-to-End Local Pipeline:**  
+  `run_pipeline.py` to train, infer, and generate tagged datasets.
+
+- **Insights & Visualization Module:**  
+  `generate_insights.py` creates interactive and static visualizations.
+
+- **AI Agent & Report Generator:**  
+  `agent_summary.py` (or `insight_agent.py`) generates natural-language summaries and business reports.
+
+---
+
+## 7. Example Insights Generated
+
+| Chart Type | Description |
+|-------------|--------------|
+| 🌀 **Sunburst Chart** | Product hierarchy and depth visualization |
+| 💎 **Violin Plot** | Price distribution across category tiers |
+| 🫧 **Bubble Chart** | Market size vs. price-position analysis |
+| 🧠 **Agent Summary** | Auto-generated insights and recommendations |
+
+Example output:
+> “Premium headphone market dominates 32% of total SKUs, while mid-tier wired headphones show underrepresentation — potential category expansion opportunity.”
 
 ---
 
-## 📌 Next Steps
-This pipeline is extensible to:  
-- New clients with custom taxonomies.  
-- Cloud-native deployment on GCP (BigQuery + Vertex AI).  
-- Integration with APIs (FastAPI/Flask) for real-time product tagging.  
+## 8. How to Run
 
-- Add CI/CD pipeline for automatic model retraining using GitHub Actions.  
-- Expand taxonomy rules for additional product categories.  
-- Integrate a web dashboard (Streamlit) for reviewing outputs.
+```bash
+# Create environment
+python -m venv venv
+source venv/bin/activate
 
----
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the pipeline
+python run_pipeline.py
+
+# Generate charts and insights
+python generate_insights.py
+
+# Start the FastAPI app (agent summary interface)
+uvicorn main:app --reload
+
 
