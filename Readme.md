@@ -59,12 +59,12 @@ and can **generate a client-ready report** or request additional data for deeper
 ```mermaid
 graph TD
     %% Define Nodes
-    A[📦 Raw Product Data]
-    B[⚙️ Rule Engine (SQL)]
-    C[❓ Unmapped Records]
-    D[🤖 Hierarchical ML Attribution]
-    E[🗂️ Final Tagged Dataset]
-    F[🧠 Insight Generator Agent]
+    A[Raw Product Data]
+    B[Rule Engine SQL]
+    C[Unmapped Records]
+    D[Hierarchical ML Attribution]
+    E[Final Tagged Dataset]
+    F[Insight Generator Agent]
     G[📊 Interactive Client Report]
 
     %% Define Flow
@@ -75,37 +75,13 @@ graph TD
     E --> F
     F --> G
 
-    %% Group by functional stages
-    subgraph Data_Preprocessing [🧾 Data Processing]
-        A
-        B
-        C
-    end
-
-    subgraph ML_Attribution [🤖 ML Attribution Layer]
-        D
-        E
-    end
-
-    subgraph Insights [📈 Insights & Reporting]
-        F
-        G
-    end
-
-    %% Apply Styles
-    style A fill:#DCEBFF,stroke:#0047AB,stroke-width:2px,color:#000
-    style B fill:#FFF3B0,stroke:#C59A00,stroke-width:2px,color:#000
-    style C fill:#FFD6A5,stroke:#E67E22,stroke-width:2px,color:#000
-    style D fill:#E0BBE4,stroke:#6A1B9A,stroke-width:2px,color:#000
-    style E fill:#C1FFD7,stroke:#2E8B57,stroke-width:2px,color:#000
-    style F fill:#FFE6E6,stroke:#B22222,stroke-width:2px,color:#000
-    style G fill:#FFCCD5,stroke:#C21807,stroke-width:2px,color:#000
-
-    %% Subgraph colors (borders)
-    style Data_Preprocessing fill:#F7FBFF,stroke:#4682B4,stroke-width:2px
-    style ML_Attribution fill:#F9F7FF,stroke:#8A2BE2,stroke-width:2px
-    style Insights fill:#FFF9F9,stroke:#B22222,stroke-width:2px
-
+    %% Apply Styles for clarity
+    style A fill:#D9E8FF,stroke:#3C78D8
+    style B fill:#FFF2CC,stroke:#E0A300
+    style D fill:#E6CCFF,stroke:#A349A4
+    style E fill:#D0F0C0,stroke:#6AA84F
+    style F fill:#FFF2CC,stroke:#E0A300
+    style G fill:#FFD9D9,stroke:#CC0000
 
 ```
 ---
