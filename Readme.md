@@ -56,7 +56,7 @@ and can **generate a client-ready report** or request additional data for deeper
 
 ### 🏗️ System Architecture
 
-'''
+```mermaid
 graph TD
     %% Define Nodes
     A[Raw Product Data]
@@ -82,7 +82,7 @@ graph TD
     style E fill:#D0F0C0,stroke:#6AA84F
     style F fill:#FFF2CC,stroke:#E0A300
     style G fill:#FFD9D9,stroke:#CC0000
-'''
+
 
 
 - Integrate a web dashboard (Streamlit) for reviewing outputs.
