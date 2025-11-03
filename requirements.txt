@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pandas
+scikit-learn
+joblib
+plotly
+seaborn
+matplotlib
+jinja2
+langgraph
+langchain
+langchain-google-genai

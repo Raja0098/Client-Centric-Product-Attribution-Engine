@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Attribution Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #f0f0f0;
+            position: relative;
+        }
+
+        .home-btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .home-btn::before {
+            content: "🏠";
+            font-size: 1.2em;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.3em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        /* Collapsible Section Styles */
+        .collapsible {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            cursor: pointer;
+            padding: 20px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.3em;
+            font-weight: 600;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Special styling for AI insights button */
+        .collapsible.ai-insights {
+            background: linear-gradient(135deg, #2196F3 0%, #1565C0 100%);
+        }
+
+        .collapsible.ai-insights:hover {
+            background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
+        }
+
+        .collapsible:hover {
+            background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .collapsible:after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible.active:after {
+            transform: rotate(-180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+            border-radius: 0 0 12px 12px;
+            margin-bottom: 30px;
+        }
+
+        .collapsible-content.active {
+            max-height: 5000px;
+        }
+
+        .content-inner {
+            padding: 30px;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+        }
+
+        /* AI Insights content styling */
+        .content-inner.ai-content {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 6px solid #2196F3;
+        }
+        
+        .insight-card {
+            margin-bottom: 30px;
+        }
+        
+        img, iframe {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: block;
+            margin: 0 auto;
+            border: 2px solid #f0f0f0;
+        }
+        
+        iframe {
+            height: 800px;
+            width: 100%;
+            border: none;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .feedback-content {
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .feedback-content h1, .feedback-content h2 {
+            color: #1565C0;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .feedback-content h1 {
+            font-size: 1.8em;
+            border-bottom: 2px solid #2196F3;
+            padding-bottom: 10px;
+        }
+        
+        .feedback-content h2 {
+            font-size: 1.4em;
+        }
+        
+        .feedback-content h3 {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .feedback-content ul, .feedback-content ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .feedback-content li {
+            margin-bottom: 8px;
+        }
+        
+        .feedback-content p {
+            margin-bottom: 15px;
+        }
+        
+        .feedback-content strong {
+            color: #1565C0;
+            font-weight: 600;
+        }
+        
+        .download-section {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+        }
+        
+        .download-section p {
+            color: white;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .download-btn {
+            background: white;
+            color: #667eea;
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: #f8f9fa;
+        }
+        
+        .loading-placeholder {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-style: italic;
+        }
+
+        .chart-icon {
+            margin-right: 10px;
+        }
+
+        .section-header {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            header {
+                padding-top: 60px;
+            }
+
+            .home-btn {
+                position: relative;
+                display: block;
+                width: fit-content;
+                margin: 0 auto 20px auto;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            iframe {
+                height: 500px;
+            }
+
+            .collapsible {
+                font-size: 1.1em;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="home-btn">Home</a>
+            <h1>Product Attribution Engine</h1>
+            <h2>AI-Powered Strategic Insights Report</h2>
+        </header>
+
+        <!-- AI INSIGHTS AS COLLAPSIBLE -->
+        <h2 class="section-header">💡 Strategic Analysis</h2>
+        
+        <div class="insight-card">
+            <button class="collapsible ai-insights active">
+                <span><span class="chart-icon">🤖</span>AI-Generated Strategic Analysis</span>
+            </button>
+            <div class="collapsible-content active">
+                <div class="content-inner ai-content">
+                    <div class="feedback-content">
+                        {% if feedback and feedback.strip() %}
+                            {{ feedback | safe }}
+                        {% else %}
+                            <div class="loading-placeholder">
+                                <p>⏳ Generating AI insights... Please refresh in a moment.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLLAPSIBLE CHARTS SECTION -->
+        <h2 class="section-header">📊 Data Visualizations</h2>
+
+        <div class="insight-card">
+            <button class="collapsible">
+                <span><span class="chart-icon">📈</span>Interactive Product Catalog Hierarchy</span>
+            </button>
+            <div class="collapsible-content">
+                <div class="content-inner">
+                    <iframe src="/output/{{ session_id }}/insight_1_market_overview.html"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-card">
+            <button class="collapsible">
+                <span><span class="chart-icon">💰</span>Competitive Price Landscape</span>
+            </button>
+            <div class="collapsible-content">
+                <div class="content-inner">
+                    <img src="/output/{{ session_id }}/insight_2_price_landscape.png" alt="Price Landscape Chart" />
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-card">
+            <button class="collapsible">
+                <span><span class="chart-icon">🎯</span>Market Opportunity Matrix</span>
+            </button>
+            <div class="collapsible-content">
+                <div class="content-inner">
+                    <img src="/output/{{ session_id }}/insight_3_opportunity_matrix.png" alt="Market Opportunity Matrix" />
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <p>📦 Download the complete analysis package</p>
+            <a href="/download/{{ session_id }}" class="download-btn">Download Results (.zip)</a>
+        </div>
+    </div>
+
+    <script>
+        // Collapsible functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const collapsibles = document.querySelectorAll('.collapsible');
+            
+            collapsibles.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    content.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
